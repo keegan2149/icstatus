@@ -97,9 +97,9 @@ def format_san_resutls(results_dict = {},current_device=''):
 	print title
 	print heading
 	print horizontal_border
-	output.append(title)
-	output.append(heading)
-	output.append(horizontal_border)
+	output.append(title + '\n')
+	output.append(heading + '\n')
+	output.append(horizontal_border + '\n')
 	variable_fields = {}
 	space_count = {}
 	lwhitespace = {}
@@ -155,10 +155,10 @@ def format_san_resutls(results_dict = {},current_device=''):
 
 		line = '|%(value1)s|   %(value2)s   |    %(value3)s    |%(value4)s|   %(value5)s   |   %(value6)s   |         %(value7)s          |     %(value8)s     |   %(value9)s   |       %(value11)s      |' % { 'value1': lwhitespace['drive name'] + drive_names[index] + rwhitespace['drive name'], 'value2':results_dict['device class'].values[index], 'value3':results_dict['devicemode'].values[index], 'value4': lwhitespace['drive serial'] + results_dict['serial number'].values[index] + rwhitespace['drive serial'], 'value5':results_dict['temperature'].values[index] , 'value6':results_dict['device raid'].values[index] , 'value7':smart_health_status, 'value8':results_dict["device smarthealth"].values[index],'value9':results_dict['storage device capacity'].values[index] , 'value11':storage_device_status}
 		print  line
-		output.append(line)
+		output.append(line + '\n')
 	print horizontal_border
 	print
-	output.append(horizontal_border)
+	output.append(horizontal_border + '\n')
 	output.append('\n')
 
 	return output
@@ -206,5 +206,5 @@ for current_device in devices:
 
 logger(message=message)
 
-icsendmail.ic_sendmail(receiver_info = {'keegan holley':'kholley@icore.com'}, subject='ixlink status',body=message)
+icsendmail.ic_sendmail(receiver_info = {'keegan holley':'kholley@icore.com'}, subject='ixlink status',payload=message)
 	
