@@ -2,7 +2,9 @@
 
 import subprocess
 import re
+import icsendmail
 from hnmp import SNMP
+import datetime
 
 class snmp_get_response(object):
 	def __init__(self):
@@ -25,18 +27,15 @@ class snmp_get_response(object):
 			print "duplicate key"
 
 
-def do_get(device,oid,community="public",table='no',columns={},column_mapping={}):
-	snmp = SNMP(device,community)
-
-	if table != 'no':
-		snmp_table = snmp.table(
-			oid,
-			columns = columns,
-			column_value_mapping=column_mapping,
-		)
-		fetch_all_columns=False
-	else:
-		response = snmp.get(oid)
+def logger(message=[],logfile='/var/log/icstatus'):
+	now = datetime.datetime.now()
+	fh = open(logfile,'a')
+	if isinstance(message,str):
+		fh.write(message)
+	elif isinstance(message,list):
+		for line in message:
+			fh.write(line)
+	fh.close()
 
 def do_get_from_shell(device,snmp_info = {},table='no'):
 	command = "snmpwalk -v %(version)s -c %(community)s %(device)s  %(oid)s" % snmp_info 
@@ -79,46 +78,8 @@ def convert_boolean(value):
 	else:
 		return "fail"
 
-
-
-devices = ["san01","san02","san03"]
-
-for current_device in devices:
-	snmp_info = {
-		"device": current_device,
-		"version": '2c',
-		"community": "public",
-		"oid":'.1.3.6.1.4.1.9804.3.1.1.2.4.2.1',
-		"base_oid":'.1.3.6.1.4.1.9804',
-		"base_oid_name":'SNMPv2-SMI::enterprises.9804',
-		"table_oid":'.3.1.1.2.4.2.1',
-		"table":'yes',
-		"colunms": {
-			2: "device model",
-			3: "device class",
-			4: "unavailable",
-			5: "devicemode",
-			6: "unavailable",
-			7: "serial number",
-			9: "temperature",
-			10: "temp threshold",
-			11: "temp limit",
-			12: "temp ok",
-			13: "device label",
-			14: "device name",
-			15: "device raid",
-			16: "device firmware",
-			17: "device smarthealth",
-			18: "device smarthealth status",
-			19: "storage device capacity",
-			20: "hot removable",
-			90: "storage device state",
-			91: "storage device status",
-		}
-	}
-	results_dict = do_get_from_shell(current_device,snmp_info=snmp_info,table='yes')
-
-
+def format_san_resutls(results_dict = {},current_device=''):
+	output = []
 	drive_dict = {}
 	drive_names = results_dict['device name'].values
 	number_of_drives = len(drive_names.keys())
@@ -136,6 +97,9 @@ for current_device in devices:
 	print title
 	print heading
 	print horizontal_border
+	output.append(title)
+	output.append(heading)
+	output.append(horizontal_border)
 	variable_fields = {}
 	space_count = {}
 	lwhitespace = {}
@@ -189,7 +153,58 @@ for current_device in devices:
 			lwhitespace['drive serial'] = " " * (space_count['drive serial']/2)
 			rwhitespace['drive serial'] = " " * (space_count['drive serial']/2)
 
-
-		print  '|%(value1)s|   %(value2)s   |    %(value3)s    |%(value4)s|   %(value5)s   |   %(value6)s   |         %(value7)s          |     %(value8)s     |   %(value9)s   |       %(value11)s      |' % { 'value1': lwhitespace['drive name'] + drive_names[index] + rwhitespace['drive name'], 'value2':results_dict['device class'].values[index], 'value3':results_dict['devicemode'].values[index], 'value4': lwhitespace['drive serial'] + results_dict['serial number'].values[index] + rwhitespace['drive serial'], 'value5':results_dict['temperature'].values[index] , 'value6':results_dict['device raid'].values[index] , 'value7':smart_health_status, 'value8':results_dict["device smarthealth"].values[index],'value9':results_dict['storage device capacity'].values[index] , 'value11':storage_device_status}
+		line = '|%(value1)s|   %(value2)s   |    %(value3)s    |%(value4)s|   %(value5)s   |   %(value6)s   |         %(value7)s          |     %(value8)s     |   %(value9)s   |       %(value11)s      |' % { 'value1': lwhitespace['drive name'] + drive_names[index] + rwhitespace['drive name'], 'value2':results_dict['device class'].values[index], 'value3':results_dict['devicemode'].values[index], 'value4': lwhitespace['drive serial'] + results_dict['serial number'].values[index] + rwhitespace['drive serial'], 'value5':results_dict['temperature'].values[index] , 'value6':results_dict['device raid'].values[index] , 'value7':smart_health_status, 'value8':results_dict["device smarthealth"].values[index],'value9':results_dict['storage device capacity'].values[index] , 'value11':storage_device_status}
+		print  line
+		output.append(line)
 	print horizontal_border
 	print
+	output.append(horizontal_border)
+	output.append('\n')
+
+	return output
+
+
+devices = ["san01","san02","san03"]
+snmp_info = {
+	"device": '',
+	"version": '2c',
+	"community": "public",
+	"oid":'.1.3.6.1.4.1.9804.3.1.1.2.4.2.1',
+	"base_oid":'.1.3.6.1.4.1.9804',
+	"base_oid_name":'SNMPv2-SMI::enterprises.9804',
+	"table_oid":'.3.1.1.2.4.2.1',
+	"table":'yes',
+	"colunms": {
+		2: "device model",
+		3: "device class",
+		4: "unavailable",
+		5: "devicemode",
+		6: "unavailable",
+		7: "serial number",
+		9: "temperature",
+		10: "temp threshold",
+		11: "temp limit",
+		12: "temp ok",
+		13: "device label",
+		14: "device name",
+		15: "device raid",
+		16: "device firmware",
+		17: "device smarthealth",
+		18: "device smarthealth status",
+		19: "storage device capacity",
+		20: "hot removable",
+		90: "storage device state",
+		91: "storage device status",
+	}
+}
+message = []
+for current_device in devices:
+	snmp_info['device'] = current_device
+	results_dict = do_get_from_shell(current_device,snmp_info=snmp_info,table='yes')
+	result = format_san_resutls(results_dict = results_dict,current_device=current_device)
+	message += result
+
+logger(message=message)
+
+icsendmail.ic_sendmail(receiver_info = {'keegan holley':'kholley@icore.com'}, subject='ixlink status',body=message)
+	
