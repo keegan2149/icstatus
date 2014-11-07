@@ -59,7 +59,7 @@ def do_get_from_shell(device,snmp_info = {},table='no'):
 			table_oid = snmp_info['table_oid']
 			for ident,value_name in snmp_info['colunms'].items():
 				pattern = '^' + base_oid + table_oid + '\.' + str(ident) + '\.'
-				substitution = base_oid + table_oid + '.' + str(ident)
+				substitution = base_oid + table_oid + '.' + str(ident) + '|' + '\"'
 				reg_search = re.compile(pattern)
 				if reg_search.search(line):
 					temp = re.sub(substitution,'',line).split(' ')
@@ -74,7 +74,7 @@ def do_get_from_shell(device,snmp_info = {},table='no'):
 	return result_dict
 
 def convert_boolean(value):
-	if value == 1:
+	if value == '1':
 		return "pass"
 	else:
 		return "fail"
@@ -122,21 +122,74 @@ for current_device in devices:
 	drive_dict = {}
 	drive_names = results_dict['device name'].values
 	number_of_drives = len(drive_names.keys())
-	heading = '|%(heading1)s|%(heading2)s|%(heading3)s|%(heading4)s|%(heading5)s|%(heading6)s|%(heading7)s|%(heading8)s|%(heading9)s|%(heading10)s|%(heading11)s|' % { 'heading1':'  drive name  ', 'heading2':'  drive class  ', 'heading3':'  drive mode  ', 'heading4':'  drive serial  ' , 'heading5':'  temp  ' , 'heading6':'  array  ' , 'heading7':'  smart health status  ' , 'heading8':'  smart health  ', 'heading9':'  capacity  ' , 'heading10':'  device state  ' , 'heading11':'  device status  ' }
+	if current_device == "san03":
+		heading = '|%(heading1)s|%(heading2)s|%(heading3)s|%(heading4)s|%(heading5)s|%(heading6)s|%(heading7)s|%(heading8)s|%(heading9)s|%(heading11)s|' % { 'heading1':'  drive name   ', 'heading2':'   drive class   ', 'heading3':'  drive mode  ', 'heading4':'    drive serial    ' , 'heading5':'  temp  ' , 'heading6':'         array         ' , 'heading7':'  smart health status  ' , 'heading8':'  smart health  ', 'heading9':'  capacity  ' , 'heading11':'  device status  ' }
+	else: 
+		heading = '|%(heading1)s|%(heading2)s|%(heading3)s|%(heading4)s|%(heading5)s|%(heading6)s|%(heading7)s|%(heading8)s|%(heading9)s|%(heading11)s|' % { 'heading1':'  drive name   ', 'heading2':'   drive class   ', 'heading3':'  drive mode  ', 'heading4':'        drive serial        ' , 'heading5':'  temp  ' , 'heading6':'         array         ' , 'heading7':'  smart health status  ' , 'heading8':'  smart health  ', 'heading9':'  capacity  ' , 'heading11':'  device status  ' }
 	horizontal_border = '=' * len(heading)
 	formatted_device = '  ' + current_device + '  '
 	if len(formatted_device) % 2:
 		title = '=' * (len(heading)/2 - (len(formatted_device)/2)) + formatted_device  + '=' * (len(heading)/2 - (len(formatted_device)/2) - 1)
 	else:
 		title = '=' * (len(heading)/2 - (len(formatted_device)/2)) + formatted_device  + '=' * (len(heading)/2 - (len(formatted_device)/2))	
-	cell_size = 10
+	high_value = 20
 	print title
 	print heading
 	print horizontal_border
+	variable_fields = {}
+	space_count = {}
+	lwhitespace = {}
+	rwhitespace = {}
 
 	for index in sorted(drive_names):
 		smart_health_status = convert_boolean(results_dict['device smarthealth status'].values[index])
 		storage_device_status = convert_boolean(results_dict['storage device status'].values[index])
-		print  '|   %(value1)s   |   %(value2)s   |   %(value3)s   |   %(value4)s   |   %(value5)s   |   %(value6)s   |   %(value7)s   |   %(value8)s   |   %(value9)s   |   %(value10)s   |' % { 'value1':drive_names[index], 'value2':results_dict['device class'].values[index], 'value3':results_dict['devicemode'].values[index], 'value4':results_dict['serial number'].values[index] , 'value5':results_dict['temperature'].values[index] , 'value6':results_dict['device raid'].values[index] , 'value7':smart_health_status, 'value8':results_dict['storage device capacity'].values[index], 'value9':results_dict['storage device state'].values[index] , 'value10':'storage device status'}
+		if not variable_fields.has_key('drive name'):
+			variable_fields['drive name'] = len(drive_names[index])
+			space_count['drive name'] = 8
+		if variable_fields['drive name'] > 0 and (len(drive_names[index]) - variable_fields['drive name'] == 1):
+			space_count['drive name'] -= 1
+		elif variable_fields['drive name'] > 0 and (variable_fields['drive name'] - len(drive_names[index]) == 1):
+			space_count['drive name'] += 1
 
+		if not space_count['drive name'] % 2:
+			lwhitespace['drive name'] = " " * (space_count['drive name']/2)
+			rwhitespace['drive name'] = " " * (space_count['drive name']/2)
+		else:
+			lwhitespace['drive name'] = " " * ((space_count['drive name']/2) + 1)
+			rwhitespace['drive name'] = " " * (space_count['drive name']/2)
+		variable_fields['drive name'] = len(drive_names[index])
+
+		if current_device != "san03":
+			if not variable_fields.has_key('drive serial'):
+				variable_fields['drive serial'] = len(results_dict['serial number'].values[index])
+				space_count['drive serial'] = 6
+			#print "serial number length - variable field",len(results_dict['serial number'].values[index]) - variable_fields['drive serial']
+			#import pdb ; pdb.set_trace()
+			if variable_fields['drive serial'] > 0 and (len(results_dict['serial number'].values[index]) >= high_value):
+				space_count['drive serial'] = 8
+				#print "space count serial",space_count['drive serial']
+			else:
+				space_count['drive serial'] = 20
+				#print "space count serial",space_count['drive serial']
+			variable_fields['drive serial'] = len(results_dict['serial number'].values[index])
+			
+			if not space_count['drive serial'] % 2 and (len(results_dict['serial number'].values[index]) < high_value):
+				lwhitespace['drive serial'] = " " * ((space_count['drive serial']/2) - 6)
+				rwhitespace['drive serial'] = " " * ((space_count['drive serial']/2) + 6)
+			elif (len(results_dict['serial number'].values[index]) < high_value):
+				lwhitespace['drive serial'] = " " * ((space_count['drive serial']/2) - 5)
+				rwhitespace['drive serial'] = " " * ((space_count['drive serial']/2) + 6)
+			else:
+				lwhitespace['drive serial'] = " " * (space_count['drive serial']/2)
+				rwhitespace['drive serial'] = " " * (space_count['drive serial']/2)
+
+		else:
+			space_count['drive serial'] = 12
+			lwhitespace['drive serial'] = " " * (space_count['drive serial']/2)
+			rwhitespace['drive serial'] = " " * (space_count['drive serial']/2)
+
+
+		print  '|%(value1)s|   %(value2)s   |    %(value3)s    |%(value4)s|   %(value5)s   |   %(value6)s   |         %(value7)s          |     %(value8)s     |   %(value9)s   |       %(value11)s      |' % { 'value1': lwhitespace['drive name'] + drive_names[index] + rwhitespace['drive name'], 'value2':results_dict['device class'].values[index], 'value3':results_dict['devicemode'].values[index], 'value4': lwhitespace['drive serial'] + results_dict['serial number'].values[index] + rwhitespace['drive serial'], 'value5':results_dict['temperature'].values[index] , 'value6':results_dict['device raid'].values[index] , 'value7':smart_health_status, 'value8':results_dict["device smarthealth"].values[index],'value9':results_dict['storage device capacity'].values[index] , 'value11':storage_device_status}
+	print horizontal_border
 	print
