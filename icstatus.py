@@ -87,9 +87,9 @@ def format_san_resutls(results_dict = {},current_device=''):
 	drive_names = results_dict['device name'].values
 	number_of_drives = len(drive_names.keys())
 	if current_device == "san03":
-		heading = '|%(heading1)s|%(heading2)s|%(heading3)s|%(heading4)s|%(heading5)s|%(heading6)s|%(heading7)s|%(heading8)s|%(heading9)s|%(heading11)s|' % { 'heading1':'  drive name   ', 'heading2':'   drive class   ', 'heading3':'  drive mode  ', 'heading4':'    drive serial    ' , 'heading5':'  temp  ' , 'heading6':'         array         ' , 'heading7':'  smart health status  ' , 'heading8':'  smart health  ', 'heading9':'  capacity  ' , 'heading11':'  device status  ' }
+		heading = '|%(heading1)s|%(heading2)s|%(heading3)s|%(heading4)s|%(heading6)s|%(heading8)s|%(heading9)s|' % { 'heading1':'  drive name   ', 'heading2':'   drive class   ', 'heading3':'  drive mode  ', 'heading4':'    drive serial    ', 'heading6':'         array         ' , 'heading8':'  smart health  ', 'heading9':'  capacity  '}
 	else: 
-		heading = '|%(heading1)s|%(heading2)s|%(heading3)s|%(heading4)s|%(heading5)s|%(heading6)s|%(heading7)s|%(heading8)s|%(heading9)s|%(heading11)s|' % { 'heading1':'  drive name   ', 'heading2':'   drive class   ', 'heading3':'  drive mode  ', 'heading4':'        drive serial        ' , 'heading5':'  temp  ' , 'heading6':'         array         ' , 'heading7':'  smart health status  ' , 'heading8':'  smart health  ', 'heading9':'  capacity  ' , 'heading11':'  device status  ' }
+		heading = '|%(heading1)s|%(heading2)s|%(heading3)s|%(heading4)s|%(heading6)s|%(heading8)s|%(heading9)s|' % { 'heading1':'  drive name   ', 'heading2':'   drive class   ', 'heading3':'  drive mode  ', 'heading4':'        drive serial        ' , 'heading6':'         array         ' , 'heading8':'  smart health  ', 'heading9':'  capacity  '}
 	inner_object = {'header':['drive name' , 'drive class' , 'drive mode' , 'drive serial' , 'temp' , 'array' , 'smart health status' , 'smart health' , 'capacity' , 'device status']}
 	horizontal_border = '=' * len(heading)
 	formatted_device = '  ' + current_device + '  '
@@ -101,14 +101,15 @@ def format_san_resutls(results_dict = {},current_device=''):
 	print title
 	print heading
 	print horizontal_border
+<<<<<<< HEAD
 
 	table_data.append(inner_object)
 	inner_object = []
 	table_data.append({'device':[current_device]})
 
-	str_data.append(title)
-	str_data.append(heading)
-	str_data.append(horizontal_border)
+	str_data.append(title + '\n')
+	str_data.append(heading + '\n')
+	str_data.append(horizontal_border + '\n')
 
 	variable_fields = {}
 	space_count = {}
@@ -163,17 +164,17 @@ def format_san_resutls(results_dict = {},current_device=''):
 			lwhitespace['drive serial'] = " " * (space_count['drive serial']/2)
 			rwhitespace['drive serial'] = " " * (space_count['drive serial']/2)
 
-		line = '|%(value1)s|   %(value2)s   |    %(value3)s    |%(value4)s|   %(value5)s   |   %(value6)s   |         %(value7)s          |     %(value8)s     |   %(value9)s   |       %(value11)s      |' % { 'value1': lwhitespace['drive name'] + drive_names[index] + rwhitespace['drive name'], 'value2':results_dict['device class'].values[index], 'value3':results_dict['devicemode'].values[index], 'value4': lwhitespace['drive serial'] + results_dict['serial number'].values[index] + rwhitespace['drive serial'], 'value5':results_dict['temperature'].values[index] , 'value6':results_dict['device raid'].values[index] , 'value7':smart_health_status, 'value8':results_dict["device smarthealth"].values[index],'value9':results_dict['storage device capacity'].values[index] , 'value11':storage_device_status}
+		line = '|%(value1)s|   %(value2)s   |    %(value3)s    |%(value4)s|   %(value6)s   |     %(value8)s     |   %(value9)s   |' % { 'value1': lwhitespace['drive name'] + drive_names[index] + rwhitespace['drive name'], 'value2':results_dict['device class'].values[index], 'value3':results_dict['devicemode'].values[index], 'value4': lwhitespace['drive serial'] + results_dict['serial number'].values[index] + rwhitespace['drive serial'],'value6':results_dict['device raid'].values[index] , 'value8':results_dict["device smarthealth"].values[index],'value9':results_dict['storage device capacity'].values[index]}
 		inner_object = {'values':[drive_names[index],results_dict['device class'].values[index],results_dict['devicemode'].values[index],results_dict['serial number'].values[index], results_dict['temperature'].values[index] , results_dict['device raid'].values[index] , smart_health_status, results_dict["device smarthealth"].values[index],results_dict['storage device capacity'].values[index] , storage_device_status ]}
 		print  line
-		str_data.append(line)
+		str_data.append(line + '\n')
 		table_data.append(inner_object)
 		inner_object = []
+	str_data.append('\n')
 	print horizontal_border
 	print
-	str_data.append(horizontal_border)
+	str_data.append(horizontal_border + '\n')
 	str_data.append('\n')
-
 	return str_data,table_data
 
 
@@ -223,5 +224,6 @@ import pdb ; pdb.set_trace()
 
 logger(message=str_message)
 
-icsendmail.ic_sendmail(receiver_info = {'keegan holley':'kholley@icore.com'}, subject='ixlink status',list_message=table_message)
-	
+everyone  = {'keegan holley':'kholley@icore.com','Matt Berkman': 'mberkman@icore.com','Jason Alleman': 'jalleman@icore.com'}
+me = {'keegan holley':'kholley@icore.com'}
+icsendmail.ic_sendmail(receiver_info = {receiver_info = me, subject='ixlink status',list_message=table_message)
