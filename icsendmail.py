@@ -21,7 +21,7 @@ Subject: %(subject)s
 %(str_message)s
 """ % {'s_name':sender_address , 's_address':sender_name, 'receiver_list': receiver_list, 'subject': subject, 'body':inner_object}
 	elif layout == 'html_table':
-		pass
+		message = generate_html_message(message_lines=list_message)
 
 	try:
 		smtpObj = smtplib.SMTP('localhost')
@@ -62,7 +62,7 @@ table, th, td {
 				else:
 					header=False
 				indent += 1
-				message = generate_cells(list_line,indent=indent,header=header)
+				message += generate_cells(list_line,indent=indent,header=header)
 				indent -= 1
 				message += '\t' * indent + r'<\tr>\n'
 		indent -= 1
