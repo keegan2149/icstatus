@@ -6,7 +6,8 @@ import re
 import icsendmail
 from hnmp import SNMP
 import datetime
-import xml.etree.ElementTree as et
+import prtg_api as prtg
+import datetime
 
 class snmp_get_response(object):
 	def __init__(self):
@@ -46,7 +47,7 @@ def get_args(args):
 		if len(args) - args.index('-c') > 0:
 			if not re.search(r'^-',args[args.index('-c') + 1]):
 				try:
-					fh = open(args[args.index('-c') + 1],r)
+					fh = open(args[args.index('-c') + 1])
 					comments = fh.read()
 				except Exception, e:
 					print e
@@ -210,69 +211,6 @@ def format_san_resutls(results_dict = {},current_device=''):
 	return str_data,table_data
 
 
-def e_process_prtg_results(api_response):
-	def get_url(prtg_ip,node):
-		return 'https://' + prtg_ip + node.find('url').text
-	def get_probes(root,probes_list):
-		probes = []
-		for probe_id in probes_list:
-			probes.append(root.find('.//probenode[@id=probe_id]'))
-		return probes
-	def summarize_device(dev):
-		device_summary = dev('summary').text.split(',')
-		device_summary = map(int,device_summary)
-		device_active = dev('active').text
-		device_summary_url = get_url(prtg_ip,current_probe.find('./device'))
-		if device_summary[0] == 0:
-			return {'prtg_line':[device_summary[1] + ' sensors OK',device_summary_url]}
-		elif dev('active').text == 'false':
-			return {'prtg_line':[device_summary[1] + ' sensors INACT',device_summary_url]}
-		else:
-			return {'prtg_line':[device_summary[1] + ' sensors DOWN',device_summary_url]}
-
-
-	list_data = []
-	str_data = ''
-	prtg_ip = '10.0.223.171'
-	tree = et.fromstring(api_response)
-	root = tree.getroot()
-
-	summarized_groups = {9457:1,9473:1}
-	probe_ids = [9445]
-	probes = get_probes(root,probe_ids)
-	for current_probe in probes:
-		probe_name = current_probe.find('name').text
-		probe_url = get_url(prtg_ip,current_probe)
-		probe_active = current_group.find('active')
-		list_data.append({'device':[probe_name,probe_url]})
-		probe_device = current_probe.find('device')
-		list_data.append(summarize_device(probe_device))
-
-		groups = current_probe.findall('./group')
-		for current_group in groups:
-			group_name = current_group.find('name').text
-			group_url = get_url(prtg_ip,current_group)
-			group_active = current_group.find('active')
-			list_data.append({'header':[group_name,group_url]})
-
-			devices = current_group.findall('./device')
-			for current_device in devices:
-				sensors_list = []
-				device_name = current_device.find('name').text
-				device_url = get_url(prtg_ip,current_device)
-				device_active = current_device.find('active')
-
-				sensors = current_device.findall('./sensor')
-				for current_sensor in sensors:
-					sensor_name = current_sensor.find('name').text
-					sensor_url = get_url(prtg_ip,current_sensor)
-					sensor_status = current_sensor.find('status')
-					sensor_message = current_sensor.find('statusmessage')
-					sensor_active = current_sensor.find('active')
-					sensors_list.append({'sensor':{'name':sensor_name,'status':sensor_status,'message':sensor_message,'active':sensor_active,'url':sensor_url}})
-				list_data.append({'prtg_device':{'name':device_name,'url':device_url,'active':device_active,'sensors':sensors_list}})
-
-	return list_data
 
 
 devices = ["san01","san02","san03"]
@@ -311,6 +249,9 @@ snmp_info = {
 str_message = []
 table_message = []
 comments,bulleted,args_dict = get_args(sys.argv)
+prtg_response = prtg.get_prtg_results()
+print prtg.e_process_prtg_results(prtg_response)
+
 for current_device in devices:
 	snmp_info['device'] = current_device
 	results_dict = do_get_from_shell(current_device,snmp_info=snmp_info,table='yes')
@@ -321,10 +262,12 @@ for current_device in devices:
 
 logger(message=str_message)
 
-everyone  = {'keegan holley':'kholley@icore.com','Matt Berkman': 'mberkman@icore.com','Jason Alleman': 'jalleman@icore.com'}
+
+everyone  = {'keegan holley':'kholley@icore.com','Matt Berkman': 'mberkman@icore.com','Jason Alleman': 'jalleman@icore.com', 'Esteban Dolores': 'esteban.deleon@telarix.com', 'Rama Iyer': 'rama.iyer@icore.com'}
 me = {'keegan holley':'kholley@icore.com '}
 gmail = {'keegan holley2':'keegan2149@gmail.com'}
 me2 = me
 me2.update(gmail)
 everyone.update(gmail)
-icsendmail.ic_sendmail(receiver_info = everyone, subject='ixlink status',comments=comments,list_message=table_message)
+subject = 'ixlink status ' + datetime.datetime.now().__str__()
+icsendmail.ic_sendmail(receiver_info = me, subject='ixlink status',comments=comments,list_message=table_message)

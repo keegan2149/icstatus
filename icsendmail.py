@@ -9,19 +9,17 @@ def ic_sendmail(sender_address = 'status-automation@ixlink.com',sender_name = 'r
 
 	receiver_list = ''
 	receiver_addresses = ''
+	msg = MIMEMultipart('alternative')
+
 	for name,address in receiver_info.items():
 		receiver_list += " %(name)s <%(address)s>," % {'name': name,'address': address}
-	
-	receiver_list.rstrip(',')
-	receiver_addresses = ','.join(receiver_info.values())
-	receiver_addresses.rstrip(', ')
-
+	for address in receiver_info.values():
+		msg.add_header('To',address)
 	txt_body = MIMEText(''.join(str_message), 'plain')
 	html_body = MIMEText(generate_html_message(message_lines=list_message,comments=comments), 'html')
 
 	print html_body
 
-	msg = MIMEMultipart('alternative')
 	msg['Subject'] = subject
 	msg['From'] = sender_address
 	msg['To'] = receiver_addresses
@@ -31,7 +29,7 @@ def ic_sendmail(sender_address = 'status-automation@ixlink.com',sender_name = 'r
 
 	try:
 		smtpObj = smtplib.SMTP('localhost')
-		smtpObj.sendmail(sender_address, receiver_addresses, msg.as_string())
+		smtpObj.sendmail(sender_address, msg.get_all('To'), msg.as_string())
 		print "Successfully sent email"
 		return 0
 	except Exception , e:
