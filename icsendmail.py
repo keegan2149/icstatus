@@ -67,13 +67,6 @@ def ic_mime_mail(sender_address = 'status-automation@ixlink.com',sender_name = '
 
 
 def generate_html_message(message_lines=[],layout='html_table'):
-	css = """\t\t<style type="text/css">
-\t\t\ttable, th { border: 1px solid black; background-color: #DCDCDC;}
-\t\t\ttd { font-family: Verdana, Georgia, Arial, sans-serif;font-size: 9px;color:#000; border: 1px solid black;background-color: #DCDCDC;}
-\t\t\ttd.prtg { font-family: Verdana, Georgia, Arial, sans-serif;font-size: 8px;color:#000;background-color: #DCDCDC;}
-\t\t\ttd.device { "font-family: Verdana, Georgia, Arial, sans-serif;font-size: 12px;color:#000; font-weight: 9000;text-align: center;background-color: #DCDCDC;"}
-\t\t</style>
-"""
 	def generate_cells(line = [],indent=0,line_type=''):
 		cells = ''
 		if line_type == 'header':
@@ -88,7 +81,7 @@ def generate_html_message(message_lines=[],layout='html_table'):
 		return cells
 
 	if layout == 'html_table':
-		message = '<html>\n\t<head>' + css + '\n\t\t<meta http-equiv=\'Content-Type\' content=\'text/html; charset=utf-8\'/>\n\t\t<meta http-equiv=\'X-UA-Compatible\' content=\'IE=edge,chrome=1\'/>\n\t</head>\n\t\t<body>\n\t\t\t<table style="border: 1px solid black;background-color: #DCDCDC">\n'
+		message = '<html>\n\t<head>\n\t\t<meta http-equiv=\'Content-Type\' content=\'text/html; charset=utf-8\'/>\n\t\t<meta http-equiv=\'X-UA-Compatible\' content=\'IE=edge,chrome=1\'/>\n\t</head>\n\t\t<body>\n\t\t\t<table style="border: 1px solid black;background-color: #DCDCDC">\n'
 		indent = 4
 		tab = '\t'
 		for line in message_lines:
