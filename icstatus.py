@@ -1,5 +1,6 @@
 #!/usr/local/bin/python2.7
-
+import sys
+import os
 import subprocess
 import re
 import icsendmail
@@ -26,6 +27,37 @@ class snmp_get_response(object):
 			self.size = len(self.values.keys())
 		else:
 			print "duplicate key"
+
+def get_args(args):
+	def print_help_and_die():
+		print """ icstatus.py [-h] [-b] [-c] [<comments file>]
+			-h - print help
+			-c <comments file> - attach comments to status email
+			-b - bulleted comments in html version of email
+"""
+		sys.exit()
+
+	args_dict = dict((arg,0) for arg in args)
+	comments = ''
+	bulleted = False
+	if args_dict.has_key('-h'):
+		print_help_and_die()
+	elif args_dict.has_key('-c'):	
+		if len(args) - args.index('-c') > 0:
+			if not re.search(r'^-',args[args.index('-c') + 1]):
+				try:
+					fh = open(args[args.index('-c') + 1],r)
+					comments = fh.read()
+				except Exception, e:
+					print e
+					print "cannot open comments file running script without comments"
+			else:
+				print_help_and_die()
+
+	if args_dict.has_key('-b'):
+		bulleted = True
+	return comments,bulleted,args_dict
+
 
 
 def logger(message=[],logfile='/var/log/icstatus'):
@@ -238,7 +270,7 @@ def e_process_prtg_results(api_response):
 					sensor_message = current_sensor.find('statusmessage')
 					sensor_active = current_sensor.find('active')
 					sensors_list.append({'sensor':{'name':sensor_name,'status':sensor_status,'message':sensor_message,'active':sensor_active,'url':sensor_url}})
-				list_data.append({'prtg_device':{'name':device_name,'url':device_url,'active':device_active,'sensors':sensors_list})
+				list_data.append({'prtg_device':{'name':device_name,'url':device_url,'active':device_active,'sensors':sensors_list}})
 
 	return list_data
 
@@ -278,6 +310,7 @@ snmp_info = {
 }
 str_message = []
 table_message = []
+comments,bulleted,args_dict = get_args(sys.argv)
 for current_device in devices:
 	snmp_info['device'] = current_device
 	results_dict = do_get_from_shell(current_device,snmp_info=snmp_info,table='yes')
@@ -289,6 +322,9 @@ for current_device in devices:
 logger(message=str_message)
 
 everyone  = {'keegan holley':'kholley@icore.com','Matt Berkman': 'mberkman@icore.com','Jason Alleman': 'jalleman@icore.com'}
-me = {'keegan holley':'keegan2149@gmail.com '}
-gmail = {'keegan holley':'keegan2149@gmail.com'}
-icsendmail.ic_sendmail(receiver_info = gmail, subject='ixlink status',list_message=table_message)
+me = {'keegan holley':'kholley@icore.com '}
+gmail = {'keegan holley2':'keegan2149@gmail.com'}
+me2 = me
+me2.update(gmail)
+everyone.update(gmail)
+icsendmail.ic_sendmail(receiver_info = everyone, subject='ixlink status',comments=comments,list_message=table_message)
