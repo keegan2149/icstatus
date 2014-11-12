@@ -132,9 +132,9 @@ def format_san_resutls(results_dict = {},current_device=''):
 	else:
 		title = '=' * (len(heading)/2 - (len(formatted_device)/2)) + formatted_device  + '=' * (len(heading)/2 - (len(formatted_device)/2))	
 	high_value = 20
-	print title
-	print heading
-	print horizontal_border
+	#print title
+	#print heading
+	#print horizontal_border
 
 	table_data.append(inner_object)
 	inner_object = []
@@ -198,14 +198,14 @@ def format_san_resutls(results_dict = {},current_device=''):
 			rwhitespace['drive serial'] = " " * (space_count['drive serial']/2)
 
 		line = '|%(value1)s|   %(value2)s   |    %(value3)s    |%(value4)s|   %(value6)s   |     %(value8)s     |   %(value9)s   |' % { 'value1': lwhitespace['drive name'] + drive_names[index] + rwhitespace['drive name'], 'value2':results_dict['device class'].values[index], 'value3':results_dict['devicemode'].values[index], 'value4': lwhitespace['drive serial'] + results_dict['serial number'].values[index] + rwhitespace['drive serial'],'value6':results_dict['device raid'].values[index] , 'value8':results_dict["device smarthealth"].values[index],'value9':results_dict['storage device capacity'].values[index]}
-		inner_object = {'values':[drive_names[index],results_dict['device class'].values[index],results_dict['devicemode'].values[index],results_dict['serial number'].values[index], results_dict['temperature'].values[index] , results_dict['device raid'].values[index] , smart_health_status, results_dict["device smarthealth"].values[index],results_dict['storage device capacity'].values[index] , storage_device_status ]}
-		print  line
+		inner_object = {'cmc_values':[drive_names[index],results_dict['device class'].values[index],results_dict['devicemode'].values[index],results_dict['serial number'].values[index], results_dict['temperature'].values[index] , results_dict['device raid'].values[index] , smart_health_status, results_dict["device smarthealth"].values[index],results_dict['storage device capacity'].values[index] , storage_device_status ]}
+		#print  line
 		str_data.append(line + '\n')
 		table_data.append(inner_object)
 		inner_object = []
 	str_data.append('\n')
-	print horizontal_border
-	print
+	#print horizontal_border
+	#print
 	str_data.append(horizontal_border + '\n')
 	str_data.append('\n')
 	return str_data,table_data
@@ -213,7 +213,15 @@ def format_san_resutls(results_dict = {},current_device=''):
 
 
 
+str_message = []
+table_message = []
 devices = ["san01","san02","san03"]
+everyone  = {'Rama Iyer':'rama.iyer@telarix.com','Keegan Holley':'kholley@icore.com>','Mike Emerson':'m.emerson@telarix.com', 'Swapnil Gadkari':'sgadkari@telarix.com', 'Susan Wegmueller':'swegmueller@ixlink.com', 'Jason Alleman':'jalleman@icore.com', 'Matt Berkman':'mberkman@icore.com', 'Esteban Dolores': 'esteban.deleon@telarix.com'}
+ixexec = {'iXLinkexec':'iXLinkexec@telarix.com'}
+me = {'keegan holley':'kholley@icore.com '}
+gmail = {'keegan holley2':'keegan2149@gmail.com'}
+me2 = me
+me2.update(gmail)
 snmp_info = {
 	"device": '',
 	"version": '2c',
@@ -246,28 +254,20 @@ snmp_info = {
 		91: "storage device status",
 	}
 }
-str_message = []
-table_message = []
 comments,bulleted,args_dict = get_args(sys.argv)
 prtg_response = prtg.get_prtg_results()
-print prtg.e_process_prtg_results(prtg_response)
+prtg_structure = prtg.e_process_prtg_results(prtg_response)
+table_message = prtg_structure
+subject = 'PRTG status ' + datetime.datetime.now().__str__()
+icsendmail.ic_sendmail(receiver_info = me, cc_info = gmail, subject=subject,comments=comments,list_message=table_message)
 
+table_message = []
+subject = 'HP SAN drive status ' + datetime.datetime.now().__str__()
 for current_device in devices:
 	snmp_info['device'] = current_device
 	results_dict = do_get_from_shell(current_device,snmp_info=snmp_info,table='yes')
 	str_result,list_result = format_san_resutls(results_dict = results_dict,current_device=current_device)
 	str_message += str_result
 	table_message += list_result
-
-
 logger(message=str_message)
-
-
-everyone  = {'keegan holley':'kholley@icore.com','Matt Berkman': 'mberkman@icore.com','Jason Alleman': 'jalleman@icore.com', 'Esteban Dolores': 'esteban.deleon@telarix.com', 'Rama Iyer': 'rama.iyer@icore.com'}
-me = {'keegan holley':'kholley@icore.com '}
-gmail = {'keegan holley2':'keegan2149@gmail.com'}
-me2 = me
-me2.update(gmail)
-everyone.update(gmail)
-subject = 'ixlink status ' + datetime.datetime.now().__str__()
-icsendmail.ic_sendmail(receiver_info = me, subject='ixlink status',comments=comments,list_message=table_message)
+icsendmail.ic_sendmail(receiver_info = me, cc_info = gmail, subject=subject,comments=comments,list_message=table_message)
