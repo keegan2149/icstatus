@@ -35,11 +35,11 @@ def e_process_prtg_results(api_response):
 		device_active = dev.find('active').text
 		device_summary_url = get_url(prtg_ip,current_probe.find('./device'))
 		if device_summary[0] == 0:
-			return {'prtg_line':[str(device_summary[1]) + ' sensors OK',device_summary_url]}
+			return {'prtg_probe_line':[str(device_summary[1]) + ' sensors OK',device_summary_url]}
 		elif dev('active').text == 'false':
-			return {'prtg_line':[str(device_summary[1]) + ' sensors INACT',device_summary_url]}
+			return {'prtg_probe_line':[str(device_summary[1]) + ' sensors INACT',device_summary_url]}
 		else:
-			return {'prtg_line':[str(device_summary[1]) + ' sensors DOWN',device_summary_url]}
+			return {'prtg_probe_line':[str(device_summary[1]) + ' sensors DOWN',device_summary_url]}
 
 
 	list_data = []
@@ -55,8 +55,8 @@ def e_process_prtg_results(api_response):
 		probe_name = current_probe.find('name').text
 		probe_url = get_url(prtg_ip,current_probe)
 		probe_active = current_probe.find('active')
-		list_data.append({'device':[probe_name,probe_url]})
 		probe_device = current_probe.find('device')
+		list_data.append({'prtg_probe_device':[probe_name,probe_active.text,probe_url]})
 		list_data.append(summarize_device(probe_device))
 
 		groups = current_probe.findall('./group')
@@ -64,7 +64,7 @@ def e_process_prtg_results(api_response):
 			group_name = current_group.find('name').text
 			group_url = get_url(prtg_ip,current_group)
 			group_active = current_group.find('active')
-			list_data.append({'header':[group_name,group_url]})
+			list_data.append({'prtg_group':[group_name,group_active.text,group_url]})
 
 			devices = current_group.findall('./device')
 			for current_device in devices:
@@ -72,15 +72,18 @@ def e_process_prtg_results(api_response):
 				device_name = current_device.find('name').text
 				device_url = get_url(prtg_ip,current_device)
 				device_active = current_device.find('active')
+				list_data.append({'prtg_device':[device_name,device_active.text,device_url]})
 
 				sensors = current_device.findall('./sensor')
 				for current_sensor in sensors:
+					if current_sensor.attrib['id'] == 4814:
+						import pdb ; pdb.set_trace()
 					sensor_name = current_sensor.find('name').text
 					sensor_url = get_url(prtg_ip,current_sensor)
 					sensor_status = current_sensor.find('status')
 					sensor_message = current_sensor.find('statusmessage')
 					sensor_active = current_sensor.find('active')
-					sensors_list.append({'sensor':{'name':sensor_name,'status':sensor_status,'message':sensor_message,'active':sensor_active,'url':sensor_url}})
-				list_data.append({'prtg_device':{'name':device_name,'url':device_url,'active':device_active,'sensors':sensors_list}})
+					sensors_list.append({'name':sensor_name,'status':sensor_status.text,'message':sensor_message.text,'active':sensor_active.text,'url':sensor_url})
+				list_data.append({'sensors':sensors_list})
 
 	return list_data
