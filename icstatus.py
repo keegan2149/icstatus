@@ -255,11 +255,11 @@ snmp_info = {
 	}
 }
 comments,bulleted,args_dict = get_args(sys.argv)
-prtg_response = prtg.get_prtg_results()
-prtg_structure = prtg.e_process_prtg_results(prtg_response)
-table_message = prtg_structure
-subject = 'PRTG status ' + datetime.datetime.now().__str__()
-icsendmail.ic_sendmail(receiver_info = me, cc_info = gmail, subject=subject,comments=comments,list_message=table_message)
+#prtg_response = prtg.get_prtg_results()
+#prtg_structure = prtg.e_process_prtg_results(prtg_response)
+#table_message = prtg_structure
+#subject = 'PRTG status ' + datetime.datetime.now().__str__()
+#icsendmail.ic_sendmail(receiver_info = me, cc_info = gmail, subject=subject,comments=comments,list_message=table_message)
 
 table_message = []
 subject = 'HP SAN drive status ' + datetime.datetime.now().__str__()

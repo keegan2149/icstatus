@@ -87,16 +87,16 @@ def generate_html_message(message_lines=[],comments='',layout='html_table',prtg_
 					cells += '\t' * indent + '<th style="border: 1px solid black;background-color: #DCDCDC;text-align: center;"> ' + item + '</th>' + '\n'
 			elif line_type == 'device': 
 				for item in line:
-					cells += '\t' * indent + '<td colspan="9"  title="%s" style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 12px;color: #000;border: 1px solid black;background-color: #DCDCDC;font-weight: 900;text-align: center;" >' % line_type + item + '</td>' + '\n'
+					cells += '\t' * indent + '<td colspan="10"  title="%s" style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 12px;color: #000;border: 1px solid black;background-color: #DCDCDC;font-weight: 900;text-align: center;" >' % line_type + item + '</td>' + '\n'
 			elif line_type == 'prtg_header' or line_type == 'prtg_probe_device' or line_type == 'prtg_group':
 				url = line[2]
-				cells = '\t' * indent + '<td colspan="9"  title="%(title)s" style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 12px;color: #000;border: 1px solid black;background-color: #DCDCDC;font-weight: 900;text-align: center;"><a href="%(url)s">' % {'title': line_type, 'url':url}  + line[0] + '</a></td>' + '<td colspan="9"  style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 12px;color: #000;border: 1px solid black;background-color: #DCDCDC;font-weight: 900;text-align: center;">'  +  convert_active(line[1]) + '</td>' +'\n'
+				cells = '\t' * indent + '<td colspan="10"  title="%(title)s" style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 12px;color: #000;border: 1px solid black;background-color: #DCDCDC;font-weight: 900;text-align: center;"><a href="%(url)s">' % {'title': line_type, 'url':url}  + line[0] + '</a></td>' + '<td colspan="10"  style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 12px;color: #000;border: 1px solid black;background-color: #DCDCDC;font-weight: 900;text-align: center;">'  +  convert_active(line[1]) + '</td>' +'\n'
 			elif line_type == 'prtg_probe_line':
 				url = line[1]
-				cells = '\t' * indent + '<td colspan="9"  title="%(title)s"  style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 12px;color: #000;border: 1px solid black;background-color: #DCDCDC;text-align: center;"><a href="%(url)s">' % {'title': line_type, 'url':url}  + line[0] + '</a></td>' +'\n'
+				cells = '\t' * indent + '<td colspan="10"  title="%(title)s"  style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 12px;color: #000;border: 1px solid black;background-color: #DCDCDC;text-align: center;"><a href="%(url)s">' % {'title': line_type, 'url':url}  + line[0] + '</a></td>' +'\n'
 			elif line_type == 'prtg_device':
 				url = line[2]
-				cells = '\t' * indent + '<td colspan="9"  title="%(title)s"  style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 10px;color: #000;border: 1px solid black;background-color: #DCDCDC;font-weight: 900;text-align: center;"><a href="%(url)s">' % {'title': line_type, 'url':url}  + line[0] + '<td colspan="9"  style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 12px;color: #000;border: 1px solid black;background-color: #DCDCDC;font-weight: 900;text-align: center;">'  +  convert_active(line[1]) + '</td>' +'\n'
+				cells = '\t' * indent + '<td colspan="10"  title="%(title)s"  style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 10px;color: #000;border: 1px solid black;background-color: #DCDCDC;font-weight: 900;text-align: center;"><a href="%(url)s">' % {'title': line_type, 'url':url}  + line[0] + '<td colspan="10"  style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 12px;color: #000;border: 1px solid black;background-color: #DCDCDC;font-weight: 900;text-align: center;">'  +  convert_active(line[1]) + '</td>' +'\n'
 			elif line_type == 'sensors':
 				for sensor in line:
 					url = sensor['url']
@@ -115,7 +115,7 @@ def generate_html_message(message_lines=[],comments='',layout='html_table',prtg_
 				for item in line:
 					cells += '\t' * indent + '<td  title="%s"  style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 9px;color: #000;border: 1px solid black;background-color: #DCDCDC;text-align: center;">' % line_type + item + '</td>' + '\n'
 		except:
-			cells = '\t' * indent + '<td  title="%s" colspan="9" style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 9px;color: #000;border: 1px solid black;background-color: #DCDCDC;text-align: center;"> Error </td>' % 'Error'+ '\n'
+			cells = '\t' * indent + '<td  title="%s" colspan="10" style="font-family: Verdana, Georgia, Arial, sans-serif;font-size: 9px;color: #000;border: 1px solid black;background-color: #DCDCDC;text-align: center;"> Error </td>' % 'Error'+ '\n'
 
 		return cells
 
