@@ -1,0 +1,252 @@
+
+====================================================================================================================================================
+======================================================================  san01  =====================================================================
+|  drive name  |  drive class  |  drive mode  |  drive serial  |  temp  |  array  |  smart health  |  capacity  |  device state  |  device status  |
+
+
+column mappings
+
+2 device model "HP EF0600FATFF"
+3 device class "SAS 3.0GBPS"
+4 unavailable
+5 devicemode "active"
+6 unavailable
+7 serial number
+9 temperature
+10 temp threshold
+11 temp limit
+12 temp ok 1/2
+13 device label
+14 device name
+15 device raid array
+16 device firmware version
+17 device smarthealth
+18 device smarthealth status
+19 storage device capacity
+20 storage device hot removeable
+90 storagedevice state "on and secured"
+91 storage device status 
+
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.2.1 = STRING: "HP EF0600FATFF"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.2.2 = STRING: "HP EF0600FATFF"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.2.3 = STRING: "HP EF0600FATFF"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.2.4 = STRING: "HP EF0600FATFF"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.2.5 = STRING: "HP EF0600FATFF"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.2.6 = STRING: "HP EF0600FATFF"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.2.7 = STRING: "HP EF0600FATFF"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.2.8 = STRING: "HP EF0600FATFF"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.2.9 = STRING: "HP EF0600FATFF"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.2.10 = STRING: "HP EF0600FATFF"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.2.11 = STRING: "HP EF0600FATFF"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.2.12 = STRING: "HP EF0600FATFF"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.3.1 = STRING: "SAS 3.0GBPS"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.3.2 = STRING: "SAS 3.0GBPS"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.3.3 = STRING: "SAS 3.0GBPS"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.3.4 = STRING: "SAS 3.0GBPS"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.3.5 = STRING: "SAS 3.0GBPS"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.3.6 = STRING: "SAS 3.0GBPS"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.3.7 = STRING: "SAS 3.0GBPS"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.3.8 = STRING: "SAS 3.0GBPS"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.3.9 = STRING: "SAS 3.0GBPS"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.3.10 = STRING: "SAS 3.0GBPS"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.3.11 = STRING: "SAS 3.0GBPS"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.3.12 = STRING: "SAS 3.0GBPS"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.5.1 = STRING: "Active"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.5.2 = STRING: "Active"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.5.3 = STRING: "Active"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.5.4 = STRING: "Active"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.5.5 = STRING: "Active"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.5.6 = STRING: "Active"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.5.7 = STRING: "Active"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.5.8 = STRING: "Active"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.5.9 = STRING: "Active"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.5.10 = STRING: "Active"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.5.11 = STRING: "Active"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.5.12 = STRING: "Active"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.7.1 = STRING: "JZX0AJHJ"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.7.2 = STRING: "JZWZSSPJ"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.7.3 = STRING: "JZWRRGVJ"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.7.4 = STRING: "JZWZHRKJ"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.7.5 = STRING: "JZX0AZDJ"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.7.6 = STRING: "JZWNYE7J"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.7.7 = STRING: "JZX2AHKM"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.7.8 = STRING: "JZWZR9BJ"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.7.9 = STRING: "JZX29BMM"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.7.10 = STRING: "JZX28PHM"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.7.11 = STRING: "JZWYWSPM"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.7.12 = STRING: "JZWZYG8J"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.9.1 = Gauge32: 28
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.9.2 = Gauge32: 28
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.9.3 = Gauge32: 27
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.9.4 = Gauge32: 25
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.9.5 = Gauge32: 24
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.9.6 = Gauge32: 25
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.9.7 = Gauge32: 24
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.9.8 = Gauge32: 24
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.9.9 = Gauge32: 25
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.9.10 = Gauge32: 25
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.9.11 = Gauge32: 25
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.9.12 = Gauge32: 26
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.10.1 = INTEGER: 60
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.10.2 = INTEGER: 60
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.10.3 = INTEGER: 60
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.10.4 = INTEGER: 60
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.10.5 = INTEGER: 60
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.10.6 = INTEGER: 60
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.10.7 = INTEGER: 60
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.10.8 = INTEGER: 60
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.10.9 = INTEGER: 60
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.10.10 = INTEGER: 60
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.10.11 = INTEGER: 60
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.10.12 = INTEGER: 60
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.11.1 = INTEGER: 55
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.11.2 = INTEGER: 55
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.11.3 = INTEGER: 55
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.11.4 = INTEGER: 55
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.11.5 = INTEGER: 55
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.11.6 = INTEGER: 55
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.11.7 = INTEGER: 55
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.11.8 = INTEGER: 55
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.11.9 = INTEGER: 55
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.11.10 = INTEGER: 55
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.11.11 = INTEGER: 55
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.11.12 = INTEGER: 55
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.12.1 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.12.2 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.12.3 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.12.4 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.12.5 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.12.6 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.12.7 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.12.8 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.12.9 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.12.10 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.12.11 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.12.12 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.13.1 = STRING: "1"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.13.2 = STRING: "2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.13.3 = STRING: "3"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.13.4 = STRING: "4"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.13.5 = STRING: "5"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.13.6 = STRING: "6"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.13.7 = STRING: "7"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.13.8 = STRING: "8"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.13.9 = STRING: "9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.13.10 = STRING: "10"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.13.11 = STRING: "11"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.13.12 = STRING: "12"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.14.1 = STRING: "Drive 1"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.14.2 = STRING: "Drive 2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.14.3 = STRING: "Drive 3"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.14.4 = STRING: "Drive 4"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.14.5 = STRING: "Drive 5"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.14.6 = STRING: "Drive 6"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.14.7 = STRING: "Drive 7"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.14.8 = STRING: "Drive 8"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.14.9 = STRING: "Drive 9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.14.10 = STRING: "Drive 10"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.14.11 = STRING: "Drive 11"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.14.12 = STRING: "Drive 12"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.15.1 = STRING: "/dev/cciss/c0d1p2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.15.2 = STRING: "/dev/cciss/c0d1p2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.15.3 = STRING: "/dev/cciss/c0d1p2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.15.4 = STRING: "/dev/cciss/c0d1p2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.15.5 = STRING: "/dev/cciss/c0d1p2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.15.6 = STRING: "/dev/cciss/c0d1p2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.15.7 = STRING: "/dev/cciss/c0d2p2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.15.8 = STRING: "/dev/cciss/c0d2p2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.15.9 = STRING: "/dev/cciss/c0d2p2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.15.10 = STRING: "/dev/cciss/c0d2p2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.15.11 = STRING: "/dev/cciss/c0d2p2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.15.12 = STRING: "/dev/cciss/c0d2p2"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.16.1 = STRING: "HPD9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.16.2 = STRING: "HPD9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.16.3 = STRING: "HPD9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.16.4 = STRING: "HPD9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.16.5 = STRING: "HPD9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.16.6 = STRING: "HPD9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.16.7 = STRING: "HPD9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.16.8 = STRING: "HPD9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.16.9 = STRING: "HPD9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.16.10 = STRING: "HPD9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.16.11 = STRING: "HPD9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.16.12 = STRING: "HPD9"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.17.1 = STRING: "Normal"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.17.2 = STRING: "Normal"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.17.3 = STRING: "Normal"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.17.4 = STRING: "Normal"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.17.5 = STRING: "Normal"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.17.6 = STRING: "Normal"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.17.7 = STRING: "Normal"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.17.8 = STRING: "Normal"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.17.9 = STRING: "Normal"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.17.10 = STRING: "Normal"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.17.11 = STRING: "Normal"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.17.12 = STRING: "Normal"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.18.1 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.18.2 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.18.3 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.18.4 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.18.5 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.18.6 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.18.7 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.18.8 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.18.9 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.18.10 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.18.11 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.18.12 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.19.1 = INTEGER: 572204
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.19.2 = INTEGER: 572204 
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.19.3 = INTEGER: 572204
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.19.4 = INTEGER: 572204
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.19.5 = INTEGER: 572204
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.19.6 = INTEGER: 572204
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.19.7 = INTEGER: 572204
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.19.8 = INTEGER: 572204
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.19.9 = INTEGER: 572204
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.19.10 = INTEGER: 572204
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.19.11 = INTEGER: 572204
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.19.12 = INTEGER: 572204
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.20.1 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.20.2 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.20.3 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.20.4 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.20.5 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.20.6 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.20.7 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.20.8 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.20.9 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.20.10 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.20.11 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.20.12 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.90.1 = STRING: "On and secured"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.90.2 = STRING: "On and secured"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.90.3 = STRING: "On and secured"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.90.4 = STRING: "On and secured"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.90.5 = STRING: "On and secured"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.90.6 = STRING: "On and secured"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.90.7 = STRING: "On and secured"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.90.8 = STRING: "On and secured"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.90.9 = STRING: "On and secured"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.90.10 = STRING: "On and secured"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.90.11 = STRING: "On and secured"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.90.12 = STRING: "On and secured"
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.91.1 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.91.2 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.91.3 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.91.4 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.91.5 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.91.6 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.91.7 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.91.8 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.91.9 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.91.10 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.91.11 = INTEGER: 1
+SNMPv2-SMI::enterprises.9804.3.1.1.2.4.2.1.91.12 = INTEGER: 1
+
+
+======================================================================  san01  =====================================================================
+|  drive name  |  drive class  |  drive mode  |  drive serial  |  temp  |  array  |  smart health  |  capacity  |  device state  |  device status  |
+====================================================================================================================================================
+
+
