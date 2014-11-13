@@ -270,4 +270,4 @@ for current_device in devices:
 	str_message += str_result
 	table_message += list_result
 logger(message=str_message)
-icsendmail.ic_sendmail(receiver_info = me, cc_info = gmail, subject=subject,comments=comments,list_message=table_message)
+icsendmail.ic_sendmail(receiver_info = everyone, cc_info = ixexec, subject=subject,comments=comments,list_message=table_message)
