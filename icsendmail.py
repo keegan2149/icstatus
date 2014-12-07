@@ -5,7 +5,7 @@ from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-def ic_sendmail(sender_address = 'status-automation@ixlink.com',sender_name = 'rancid-centos',receiver_info= [],cc_info= [], subject='',comments='',list_message=[],str_message='',layout='html_table'):
+def ic_sendmail(sender_address = 'status-automation@ixlink.com',sender_name = 'rancid-centos',receiver_info= {},cc_info= {}, subject='',comments='',list_message=[],str_message='',layout='html_table'):
 
 	receiver_list = ''
 	cc_list = ''
@@ -36,7 +36,10 @@ def ic_sendmail(sender_address = 'status-automation@ixlink.com',sender_name = 'r
 
 	try:
 		smtpObj = smtplib.SMTP('localhost')
-		smtpObj.sendmail(sender_address, msg.get_all('to') + msg.get_all('cc'), msg.as_string())
+		if cc_info:
+			smtpObj.sendmail(sender_address, msg.get_all('to') + msg.get_all('cc'), msg.as_string())
+		else:
+			smtpObj.sendmail(sender_address, msg.get_all('to'), msg.as_string())			
 		print "Successfully sent email"
 		return 0
 	except Exception , e:
