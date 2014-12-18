@@ -235,7 +235,6 @@ status_list = {
 	'Lisa Tovar':'LTovar@telarix.com',
 	'Mark Hatam':'mhatam@telarix.com',
 	'Matthew Berkman':'matthew.berkman@telarix.com',
-	'Nathan Hafer':'nhafer@telarix.com',
 	'Shahdy Ali-Hassan':'sali-hassan@telarix.com',
 	'Shoma Chakravarty':'shoma.chakravarty@telarix.com',
 	'Susan Wegmueller':'swegmueller@ixlink.com',
