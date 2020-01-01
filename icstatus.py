@@ -217,31 +217,11 @@ str_message = []
 table_message = []
 devices = ["san01","san02","san03"]
 everyone  = {
-	'Rama Iyer':'rama.iyer@telarix.com',
-	'Keegan Holley':'kholley@icore.com>',
-	'Mike Emerson':'m.emerson@telarix.com', 'Swapnil Gadkari':'sgadkari@telarix.com', 'Susan Wegmueller':'swegmueller@ixlink.com', 'Jason Alleman':'jalleman@icore.com', 'Matt Berkman':'mberkman@icore.com', 'Esteban Dolores': 'esteban.deleon@telarix.com'}
 ixexec = {
-	'Shahdy Ali-Hassan':'shahdy.ali-hassan@telarix.com',
-	'Swapnil Gadkari':'swapnil.gadkari@telarix.com',
-	'Mark Hatam':'mark.hatam@telarix.com',
-	'Shoma Chakravarty':'shoma.chakravarty@telarix.com',
-	'Susan Wegmueller':'susan.wegmueller@telarix.com'
 }
 status_list = { 
-	'Chris Finn':'chris.finn@telarix.com',
-	'Esteban Deleon':'esteban.deleon@telarix.com',
-	'Jason Alleman':'jason.alleman@telarix.com',
-	'Keegan Holley':'kholley@icore.com',
-	'Lisa Tovar':'LTovar@telarix.com',
-	'Mark Hatam':'mhatam@telarix.com',
-	'Matthew Berkman':'matthew.berkman@telarix.com',
-	'Shahdy Ali-Hassan':'sali-hassan@telarix.com',
-	'Shoma Chakravarty':'shoma.chakravarty@telarix.com',
-	'Susan Wegmueller':'swegmueller@ixlink.com',
-	'Swapnil Gadkari':'sgadkari@telarix.com'
 	}
 me = {'keegan holley':'kholley@icore.com '}
-gmail = {'keegan holley2':'keegan2149@gmail.com'}
 me2 = me
 me2.update(gmail)
 snmp_info = {
