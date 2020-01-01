@@ -75,13 +75,34 @@ def ic_mime_mail(sender_address = 'status-automation@ixlink.com',sender_name = '
 	s.quit()
 
 
-def generate_html_message(message_lines=[],comments='',layout='html_table',prtg_server='10.0.223.171'):
+class html_message:
+
+	def generate_html_message(message_lines=[],comments='',layout='html_table',prtg_server='10.0.223.171'):
+
+		if layout == 'html_table':
+			if comments:
+				message = '<html>\n\t<head>\n\t\t<meta http-equiv=\'Content-Type\' content=\'text/html; charset=us-ascii\'/>\n\t\t<meta http-equiv=\'X-UA-Compatible\' content=\'IE=edge,chrome=1\'/>\n\t</head>\n\t\t<body>\n\t\t\t<p>\n\t\t\t\t' + comments + '\n\t\t\t</p>\n\t\t\t<table style="border: 1px solid black;background-color: #DCDCDC">\n'
+			else:
+				message = '<html>\n\t<head>\n\t\t<meta http-equiv=\'Content-Type\' content=\'text/html; charset=us-ascii\'/>\n\t\t<meta http-equiv=\'X-UA-Compatible\' content=\'IE=edge,chrome=1\'/>\n\t</head>\n\t\t<body>\n\t\t\t<table style="border: 1px solid black;background-color: #DCDCDC">\n'
+
+			indent = 4
+			tab = '\t'
+			for line in message_lines:
+				for line_type,list_line in line.items():
+					message += '\t' * indent + '<tr>\n'
+					indent += 1
+					message += generate_cells(list_line,indent=indent,line_type=line_type)
+					indent -= 1
+					message += '\t' * indent + '</tr>'+ '\n'
+			indent -= 1
+			message += '\t' * indent + '</table>' + '\n'
+			indent -= 1
+			message += '\t' * indent + '</body>' + '\n'
+			indent -= 1
+			message += '\t' * indent + '</html>' + '\n'
+		return message
+
 	def generate_cells(line = [],indent=0,line_type='',prtg_server='10.0.223.171'):
-		def convert_active(status):
-			if status == 'true':
-				return 'Active'
-			elif status == 'false':
-				return 'Inactive'
 
 		cells = ''
 		try:
@@ -122,26 +143,9 @@ def generate_html_message(message_lines=[],comments='',layout='html_table',prtg_
 
 		return cells
 
-	if layout == 'html_table':
-		if comments:
-			message = '<html>\n\t<head>\n\t\t<meta http-equiv=\'Content-Type\' content=\'text/html; charset=us-ascii\'/>\n\t\t<meta http-equiv=\'X-UA-Compatible\' content=\'IE=edge,chrome=1\'/>\n\t</head>\n\t\t<body>\n\t\t\t<p>\n\t\t\t\t' + comments + '\n\t\t\t</p>\n\t\t\t<table style="border: 1px solid black;background-color: #DCDCDC">\n'
-		else:
-			message = '<html>\n\t<head>\n\t\t<meta http-equiv=\'Content-Type\' content=\'text/html; charset=us-ascii\'/>\n\t\t<meta http-equiv=\'X-UA-Compatible\' content=\'IE=edge,chrome=1\'/>\n\t</head>\n\t\t<body>\n\t\t\t<table style="border: 1px solid black;background-color: #DCDCDC">\n'
-
-		indent = 4
-		tab = '\t'
-		for line in message_lines:
-			for line_type,list_line in line.items():
-				message += '\t' * indent + '<tr>\n'
-				indent += 1
-				message += generate_cells(list_line,indent=indent,line_type=line_type)
-				indent -= 1
-				message += '\t' * indent + '</tr>'+ '\n'
-		indent -= 1
-		message += '\t' * indent + '</table>' + '\n'
-		indent -= 1
-		message += '\t' * indent + '</body>' + '\n'
-		indent -= 1
-		message += '\t' * indent + '</html>' + '\n'
-	return message
+	def convert_active(status):
+		if status == 'true':
+			return 'Active'
+		elif status == 'false':
+			return 'Inactive'
 
